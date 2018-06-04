@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 将namespace的值设置为DAO类对应的路径 -->
+<mapper namespace="com.ray.dao.StudentDao">
+
+    <!-- id必须唯一，type对应javabean -->
+    <resultMap id="student" type="student">
+        <!-- column是表列名，property是实体类属性 -->
+        <id column="id" property="id"/>
+        <result column="student_id" property="student_id"/>
+        <result column="name" property="name"/>
+        <result column="age" property="age"/>
+        <result column="sex" property="sex"/>
+        <result column="birthday" property="birthday" javaType="java.sql.Date"/>
+    </resultMap>
+
+    <!-- sql片段 -->
+    <sql id="Base_Column_List">
+        id, student_id, name, age, sex, birthday
+    </sql>
+
+    <!-- 根据name查询数据(模糊查询) -->
+    <select id="selectStudentByName" parameterType="Student" resultMap="student">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM student
+        WHERE name LIKE CONCAT('%',#{name},'%')
+    </select>
+
+    <!-- 查询数据条目 -->
+    <select id="getTotal" resultType="int">
+        SELECT COUNT(*) FROM student
+    </select>
+
+    <!-- 根据名称查询数据条目 -->
+    <select id="getTotalByName" parameterType="java.lang.String" resultType="int">
+        SELECT COUNT(*) FROM student
+        WHERE name LIKE CONCAT('%',#{name},'%')
+    </select>
+
+    <!-- 增加一条数据 -->
+    <insert id="addStudent" parameterType="Student">
+        INSERT INTO student VALUES (NULL, #{student_id}, #{name},
+          #{age}, #{sex}, #{birthday})
+    </insert>
+
+    <!-- 删除一条数据 -->
+    <delete id="deleteStudent" parameterType="int">
+        DELETE FROM student WHERE id = #{id}
+    </delete>
+
+    <!-- 更新一条数据 -->
+    <update id="updateStudent" parameterType="Student">
+        UPDATE student SET student_id = #{student_id}, name = #{name},
+          age = #{age}, sex = #{sex}, birthday = #{birthday} WHERE id = #{id}
+    </update>
+
+    <!-- 根据id查询数据 -->
+    <select id="getStudent" resultMap="student" parameterType="Student">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM student
+        WHERE id = #{id}
+    </select>
+
+    <!-- PageHelper -->
+    <select id="findPageStudent" resultType="Student">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM student
+    </select>
+
+    <select id="findPageByNumAndSize" resultType="Student" parameterType="int">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM student
+    </select>
+
+    <select id="findPageByRowNum" resultType="Student">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM student
+    </select>
+</mapper>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh">
+<script src="js/page.js"></script>
+<!-- 官网jquery压缩版引用地址: -->
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生管理系统</title>
+    <!--<link rel="stylesheet" type="text/css" href="css/styles.css">-->
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="#" class="navbar-brand">学生管理系统-分页</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        菜单<b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="addStudent.html">新增学生</a> </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" id="search" class="form-control" placeholder="根据姓名搜索">
+                </div>
+                <button type="submit" class="btn btn-default" id="search_bt" onclick="page()"/>Search
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="form-group">
+    <table id="postTable" class="table table-striped">
+        <caption id="total"></caption>
+        <tr style="font-weight: bold">
+            <td>学号</td>
+            <td>姓名</td>
+            <td>年龄</td>
+            <td>性别</td>
+            <td>出生年月</td>
+            <td>编辑</td>
+            <td>删除</td>
+        </tr>
+    </table>
+</div>
+
+<div class="form-group">
+    <table id="pageTable" class="gridtable" style="width:100%;text-align: center;">
+        <tr>
+            <td id="hasPre" style="visibility: hidden"><a href="#">前一页</a></td>
+            <td style="visibility: hidden"><a href="#">nav</a></td>
+            <td id="hasNext" style="visibility: hidden"><a href="#">下一页</a></td>
+        </tr>
+    </table>
+</div>
+</body>
